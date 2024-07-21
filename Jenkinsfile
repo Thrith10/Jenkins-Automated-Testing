@@ -4,8 +4,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.image('composer:latest').inside('-v /c/Users/renes/AppData/Local/Jenkins/.jenkins/workspace/Jenkins Automated Testing:/workspace') {
-                        sh 'cd /workspace && composer install'
+                    docker.image('composer:latest').inside("-v ${env.WORKSPACE}:C:/workspace") {
+                        bat 'cd C:\\workspace && composer install'
                     }
                 }
             }
@@ -13,8 +13,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    docker.image('composer:latest').inside('-v /c/Users/renes/AppData/Local/Jenkins/.jenkins/workspace/Jenkins Automated Testing:/workspace') {
-                        sh 'cd /workspace && ./vendor/bin/phpunit tests'
+                    docker.image('composer:latest').inside("-v ${env.WORKSPACE}:C:/workspace") {
+                        bat 'cd C:\\workspace && .\\vendor\\bin\\phpunit tests'
                     }
                 }
             }
